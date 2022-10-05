@@ -1,7 +1,11 @@
 import express from 'express'
 
-const server = express()
+import { router as schools }  from './routes/schools.js'
 
-server.listen(process.env.PORT, () => {
+const app = express()
+
+app.use('/api/v1/schools', schools)
+
+app.listen(process.env.PORT, () => {
     console.log(`Server up on port ${process.env.PORT}`)
 })
