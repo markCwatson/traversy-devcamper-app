@@ -25,7 +25,7 @@ const SchoolSchema = new mongoose.Schema({
     },
     phone: {
       type: String,
-      maxlength: [12, 'Phone number must be less than 12 characters!']
+      maxlength: [16, 'Phone number must be less than 16 characters!']
     },
     email: {
       type: String,
