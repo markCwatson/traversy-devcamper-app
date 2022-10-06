@@ -1,3 +1,5 @@
+import { School } from '../models/school.js'
+
 // @desc    Get all schools in database.
 // @route   GET /api/v1/schools
 // @access  Public
@@ -15,8 +17,13 @@ const getSchool = (req, res, next) => {
 // @desc    Create a new school.
 // @route   POST /api/v1/schools
 // @access  Private
-const createSchool = (req, res, next) => {
-    res.status(201).json({ success: true })
+const createSchool = async (req, res, next) => {
+    try {
+        const school = await School.create(req.body)
+        res.status(201).json({ success: true, data: school })
+    } catch (error) {
+        res.status(400).json({ success: false })
+    }
 }
 
 // @desc    Update a school by id.

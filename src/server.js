@@ -8,6 +8,8 @@ connectDb()
 
 const app = express()
 
+app.use(express.json())
+
 if (process.env.NODE_ENV === 'dev')
 {
     // Must setup middleware before route definitions
