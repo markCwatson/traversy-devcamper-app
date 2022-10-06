@@ -1,4 +1,6 @@
 import mongoose from 'mongoose'
+import slugify from 'slugify'
+import { geocoder } from '../utils/geocoder.js'
 
 const SchoolSchema = new mongoose.Schema({
     name: { 
@@ -86,6 +88,31 @@ const SchoolSchema = new mongoose.Schema({
     {
         toJSON: { virtuals: true },
         toObject: { virtuals: true }
+})
+
+SchoolSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true } )
+  next()
+})
+
+SchoolSchema.pre('save', async function (next) {
+  const location = await geocoder.geocode(this.address)
+  this.location = {
+    type: 'Point',
+    coordinates: [
+      location[0].longitude,
+      location[0].latitude
+    ],
+    formattedAddress: location[0].formattedAddress,
+    street: location[0].streetName,
+    city: location[0].city,
+    province: location[0].stateCode,
+    postalCode: location[0].zipcode,
+    country: location[0].countryCode
+  }
+
+  this.address = undefined
+  next()
 })
 
 const School = mongoose.model('School', SchoolSchema)
