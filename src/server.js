@@ -3,6 +3,7 @@ import morgan from 'morgan'
 
 import { router as schools }  from '../routes/schools.js'
 import { connectDb } from './db/mongoose.js'
+import { errorHandler } from '../middleware/error.js'
 
 connectDb()
 
@@ -18,6 +19,7 @@ if (process.env.NODE_ENV === 'dev')
 
 // Setup routes
 app.use('/api/v1/schools', schools)
+app.use(errorHandler)
 
 const server = app.listen(process.env.PORT, () => {
     console.log(`Server up on port ${process.env.PORT}`)
