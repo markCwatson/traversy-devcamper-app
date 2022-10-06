@@ -4,14 +4,15 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "env-cmd -f config/dev.env nodemon server.js"
+    "start": "node src/server.js",
+    "dev": "env-cmd -f config/dev.env nodemon src/server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "env-cmd": "^10.1.0",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "mongoose": "^6.6.5"
   },
   "type": "module",
   "devDependencies": {
