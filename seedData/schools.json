@@ -1,0 +1,38 @@
+[
+{
+    "name": "Pretend University",
+    "description": "Pretend University is a large public research university in Nova Scotia, Canada, with three campuses in Halifax, a fourth in Bible Hill, and a second medical school campus in Saint John, New Brunswick.",
+    "website": "https://dals.ca",
+    "phone": "9024942211",
+    "email": "infoa@dal.ca",
+    "address": "629 South St, Halifax, NS B3H 4R2",
+    "programs": ["Engineering", "Nursing", "Business", "Science", "Medicine"]
+},
+{
+    "name": "Dalhousie University",
+    "description": "Dalhousie University is a large public research university in Nova Scotia, Canada, with three campuses in Halifax, a fourth in Bible Hill, and a second medical school campus in Saint John, New Brunswick.",
+    "website": "https://dal.ca",
+    "phone": "19024942211",
+    "email": "info@dal.ca",
+    "address": "629 South St, Halifax, NS B3H 4R2",
+    "programs": ["Engineering", "Nursing", "Business", "Science", "Medicine", "Law"]
+},
+{
+    "name": "Mark Watson University",
+    "description": "Mark Watson University is a large public research university in Nova Scotia, Canada, with three campuses in Halifax, a fourth in Bible Hill, and a second medical school campus in Saint John, New Brunswick.",
+    "website": "https://markwatson.ca",
+    "phone": "9024941211",
+    "email": "info@mark.ca",
+    "address": "6930 Isner Ave, Halifax, NS B3L 2J7",
+    "programs": ["Engineering", "Science"]
+},
+{
+    "name": "Markus University",
+    "description": "Markus University is a large public research university in Nova Scotia, Canada, with three campuses in Halifax, a fourth in Bible Hill, and a second medical school campus in Saint John, New Brunswick.",
+    "website": "https://markwatson.ca",
+    "phone": "15879891185",
+    "email": "info@markus.ca",
+    "address": "157 Pinetree Cres, Halifax, NS B3Z 1J7",
+    "programs": ["Engineering", "Nursing", "Business", "Science", "Medicine"]
+}
+]

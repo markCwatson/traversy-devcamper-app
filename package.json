@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "env-cmd -f config/dev.env nodemon src/server.js"
+    "dev": "env-cmd -f config/dev.env nodemon src/server.js",
+    "seed": "env-cmd -f config/dev.env node utils/seeder.js -i",
+    "delete": "env-cmd -f config/dev.env node utils/seeder.js -d"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +20,7 @@
   },
   "type": "module",
   "devDependencies": {
+    "dotenv": "^16.0.3",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20"
   }

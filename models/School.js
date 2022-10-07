@@ -68,7 +68,7 @@ const SchoolSchema = new mongoose.Schema({
             'Nursing',
             'Medicine',
             'Business',
-            'Other'
+            'Law'
         ]
     },
     averageRating: {
