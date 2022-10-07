@@ -2,6 +2,8 @@ import { School } from '../models/school.js'
 import { ErrorResponse } from '../utils/errorResponse.js'
 import { asyncHandler } from '../middleware/async.js'
 
+import { geocoder } from '../utils/geocoder.js'
+
 // @desc    Get all schools in database.
 // @route   GET /api/v1/schools
 // @access  Public
@@ -69,4 +71,25 @@ const deleteSchool = asyncHandler(async (req, res, next) => {
     res.status(200).json({ success: true, data: {} })
 })
 
-export { getSchools, getSchool, createSchool, updateSchool, deleteSchool }
+// @desc    Get all schools within a radius (in kilometers).
+// @route   GET /api/v1/schools/radius/:postalCode/:distance
+// @access  Private
+const getSchoolInRadius = asyncHandler(async (req, res, next) => {
+    const { postalCode, distance } = req.params
+
+    const location = await geocoder.geocode(postalCode)
+    const long = location[0].longitude
+    const lat = location[0].latitude
+    const radius = distance / 6378.1
+    const schools = await School.find({
+        location: { $geoWithin: { $centerSphere: [ [ long, lat], radius ] } }
+    })
+
+    res.status(200).json({
+        success: true,
+        count: schools.length,
+        data: schools
+    })
+})
+
+export { getSchools, getSchool, createSchool, updateSchool, deleteSchool, getSchoolInRadius }
