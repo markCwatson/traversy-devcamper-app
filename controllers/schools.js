@@ -8,7 +8,8 @@ import { geocoder } from '../utils/geocoder.js'
 // @route   GET /api/v1/schools
 // @access  Public
 const getSchools = asyncHandler(async (req, res, next) => {
-    const schools = await School.find()
+    const options = JSON.stringify(req.query)
+    const schools = await School.find(JSON.parse(options))
 
     if (!schools) {
         return next(new ErrorResponse('No schools found!', 404))
