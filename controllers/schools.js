@@ -8,8 +8,29 @@ import { geocoder } from '../utils/geocoder.js'
 // @route   GET /api/v1/schools
 // @access  Public
 const getSchools = asyncHandler(async (req, res, next) => {
-    const options = JSON.stringify(req.query)
-    const schools = await School.find(JSON.parse(options))
+    let query
+    
+    const queryCopy = { ...req.query }
+    const removeFields = ['select', 'sort']
+    removeFields.forEach(param => delete queryCopy[param])
+    
+    let options = JSON.stringify(queryCopy)
+    options = options.replace(/\b(in|lte|gte|lt|gt)\b/g, match => `$${match}`)
+    query = School.find(JSON.parse(options))
+
+    if (req.query.select) {
+        const fields = req.query.select.split(',').join(' ')
+        query = query.select(fields)
+    }
+
+    if (req.query.sort) {
+        const fields = req.query.sort.split(',').join(' ')
+        query = query.sort(fields)
+    } else {
+        query = query.sort('-createdAt')
+    }
+
+    const schools = await query
 
     if (!schools) {
         return next(new ErrorResponse('No schools found!', 404))
