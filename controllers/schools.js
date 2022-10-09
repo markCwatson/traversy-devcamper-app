@@ -16,7 +16,7 @@ const getSchools = asyncHandler(async (req, res, next) => {
     
     let options = JSON.stringify(queryCopy)
     options = options.replace(/\b(in|lte|gte|lt|gt)\b/g, match => `$${match}`)
-    
+
     query = School.find(JSON.parse(options)).populate({
         path: 'professors',
         select: 'name'
@@ -111,11 +111,13 @@ const updateSchool = asyncHandler(async (req, res, next) => {
 // @route   DELETE /api/v1/schools/:id
 // @access  Private
 const deleteSchool = asyncHandler(async (req, res, next) => {
-    const school = await School.findByIdAndDelete(req.params.id)
+    const school = await School.findById(req.params.id)
 
     if (!school) {
         return next(new ErrorResponse('School not found', 404))
     }
+
+    school.remove()
 
     res.status(200).json({ success: true, data: {} })
 })

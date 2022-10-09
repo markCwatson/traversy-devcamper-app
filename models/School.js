@@ -115,6 +115,11 @@ SchoolSchema.pre('save', async function (next) {
   next()
 })
 
+SchoolSchema.pre('remove', async function (next) {
+  await this.model('Professor').deleteMany({ school: this._id })
+  next()
+})
+
 SchoolSchema.virtual('professors', {
   ref: 'Professor',
   localField: '_id',
