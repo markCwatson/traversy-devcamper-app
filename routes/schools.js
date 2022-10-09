@@ -8,7 +8,10 @@ import {
     deleteSchool,
     getSchoolInRadius } from '../controllers/schools.js'
 
+import { router as professorRouter} from './professors.js'
+
 const router = express.Router()
+router.use('/:schoolId/professors', professorRouter)
 
 router.route('/').get(getSchools).post(createSchool)
 router.route('/:id').get(getSchool).put(updateSchool).delete(deleteSchool)

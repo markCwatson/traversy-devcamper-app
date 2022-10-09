@@ -1,47 +1,49 @@
 [
-{
-    "name": "Pretend University",
-    "description": "Pretend University is a large public research university in Nova Scotia, Canada, with three campuses in Halifax, a fourth in Bible Hill, and a second medical school campus in Saint John, New Brunswick.",
-    "website": "https://dals.ca",
-    "phone": "9024942211",
-    "email": "infoa@dal.ca",
-    "address": "629 South St, Halifax, NS B3H 4R2",
-    "programs": ["Engineering", "Nursing", "Business", "Science", "Medicine"]
-},
-{
-    "name": "Dalhousie University",
-    "description": "Dalhousie University is a large public research university in Nova Scotia, Canada, with three campuses in Halifax, a fourth in Bible Hill, and a second medical school campus in Saint John, New Brunswick.",
-    "website": "https://dal.ca",
-    "phone": "19024942211",
-    "email": "info@dal.ca",
-    "address": "629 South St, Halifax, NS B3H 4R2",
-    "programs": ["Engineering", "Nursing", "Business", "Science", "Medicine", "Law"]
-},
-{
-    "name": "Mark Watson University",
-    "description": "Mark Watson University is a large public research university in Nova Scotia, Canada, with three campuses in Halifax, a fourth in Bible Hill, and a second medical school campus in Saint John, New Brunswick.",
-    "website": "https://markwatson.ca",
-    "phone": "9024941211",
-    "email": "info@mark.ca",
-    "address": "6930 Isner Ave, Halifax, NS B3L 2J7",
-    "programs": ["Engineering", "Science"]
-},
-{
-    "name": "University of Toronto",
-    "description": "The University of Toronto is a public research university in Toronto, Ontario, Canada, located on the grounds that surround Queen's Park.",
-    "website": "https://utoronto.ca",
-    "phone": "(416) 978-2011",
-    "email": "info@uoft.ca",
-    "address": "27 King's College Cir, Toronto, ON M5S",
-    "programs": ["Engineering", "Nursing", "Business", "Science", "Medicine"]
-},
-{
-    "name": "University of British Columbia",
-    "description": "The University of British Columbia is a public research university with campuses near Vancouver and in Kelowna, British Columbia. Established in 1908, it is British Columbia's oldest university.",
-    "website": "https://ubc.ca",
-    "phone": "(604) 822 2211",
-    "email": "info@ubc.ca",
-    "address": "Vancouver, BC V6T 1Z4",
-    "programs": ["Engineering", "Nursing", "Business", "Science", "Medicine"]
-}
+    {
+        "_id": "6342059652c681a57f301013",
+        "name": "Pretend University",
+        "description": "Pretend University is a large public research university in Nova Scotia, Canada, with three campuses in Halifax, a fourth in Bible Hill, and a second medical school campus in Saint John, New Brunswick.",
+        "website": "https://dals.ca",
+        "phone": "9024942211",
+        "email": "infoa@dal.ca",
+        "address": "629 South St, Halifax, NS B3H 4R2",
+        "programs": ["Engineering", "Nursing", "Business", "Science", "Medicine"]
+    },
+    {
+        "_id": "6342059652c681a57f301010",
+        "name": "Dalhousie University",
+        "description": "Dalhousie University is a large public research university in Nova Scotia, Canada, with three campuses in Halifax, a fourth in Bible Hill, and a second medical school campus in Saint John, New Brunswick.",
+        "website": "https://dal.ca",
+        "phone": "19024942211",
+        "email": "info@dal.ca",
+        "address": "629 South St, Halifax, NS B3H 4R2",
+        "programs": ["Engineering", "Nursing", "Business", "Science", "Medicine", "Law"]
+    },
+    {
+        "name": "Mark Watson University",
+        "description": "Mark Watson University is a large public research university in Nova Scotia, Canada, with three campuses in Halifax, a fourth in Bible Hill, and a second medical school campus in Saint John, New Brunswick.",
+        "website": "https://markwatson.ca",
+        "phone": "9024941211",
+        "email": "info@mark.ca",
+        "address": "6930 Isner Ave, Halifax, NS B3L 2J7",
+        "programs": ["Engineering", "Science"]
+    },
+    {
+        "name": "University of Toronto",
+        "description": "The University of Toronto is a public research university in Toronto, Ontario, Canada, located on the grounds that surround Queen's Park.",
+        "website": "https://utoronto.ca",
+        "phone": "(416) 978-2011",
+        "email": "info@uoft.ca",
+        "address": "27 King's College Cir, Toronto, ON M5S",
+        "programs": ["Engineering", "Nursing", "Business", "Science", "Medicine"]
+    },
+    {
+        "name": "University of British Columbia",
+        "description": "The University of British Columbia is a public research university with campuses near Vancouver and in Kelowna, British Columbia. Established in 1908, it is British Columbia's oldest university.",
+        "website": "https://ubc.ca",
+        "phone": "(604) 822 2211",
+        "email": "info@ubc.ca",
+        "address": "Vancouver, BC V6T 1Z4",
+        "programs": ["Engineering", "Nursing", "Business", "Science", "Medicine"]
+    }
 ]

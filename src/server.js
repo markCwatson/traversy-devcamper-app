@@ -2,6 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 
 import { router as schools }  from '../routes/schools.js'
+import { router as professors }  from '../routes/professors.js'
 import { connectDb } from './db/mongoose.js'
 import { errorHandler } from '../middleware/error.js'
 
@@ -19,6 +20,7 @@ if (process.env.NODE_ENV === 'dev')
 
 // Setup routes
 app.use('/api/v1/schools', schools)
+app.use('/api/v1/professors', professors)
 app.use(errorHandler)
 
 const server = app.listen(process.env.PORT, () => {
