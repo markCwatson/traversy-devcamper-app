@@ -115,6 +115,13 @@ SchoolSchema.pre('save', async function (next) {
   next()
 })
 
+SchoolSchema.virtual('professors', {
+  ref: 'Professor',
+  localField: '_id',
+  foreignField: 'school',
+  justOne: false
+})
+
 const School = mongoose.model('School', SchoolSchema)
 
 export { School }

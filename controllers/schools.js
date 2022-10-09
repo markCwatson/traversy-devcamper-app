@@ -16,7 +16,11 @@ const getSchools = asyncHandler(async (req, res, next) => {
     
     let options = JSON.stringify(queryCopy)
     options = options.replace(/\b(in|lte|gte|lt|gt)\b/g, match => `$${match}`)
-    query = School.find(JSON.parse(options))
+    
+    query = School.find(JSON.parse(options)).populate({
+        path: 'professors',
+        select: 'name'
+    })
 
     if (req.query.select) {
         const fields = req.query.select.split(',').join(' ')

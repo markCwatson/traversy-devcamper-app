@@ -13,7 +13,10 @@ const getProfessors = asyncHandler(async (req, res, next) => {
     if (req.params.schoolId) {
         query = Professor.find({ school: req.params.schoolId })
     } else [
-        query = Professor.find()
+        query = Professor.find().populate({
+            path: 'school',
+            select: 'name location.formattedAddress'
+        })
     ]
 
     const schools = await query
