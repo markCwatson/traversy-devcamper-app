@@ -23,24 +23,24 @@ const professors = JSON.parse(
 // Seed database
 const importData = async () => {
   try {
-    await School.create(schools);
-    await Professor.create(professors);
-    console.log('Data Imported...');
-    process.exit();
+    await School.create(schools)
+    await Professor.create(professors)
+    console.log('Data Imported...')
+    process.exit()
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
 };
 
 // Delete data
 const deleteData = async () => {
   try {
-    await School.deleteMany();
-    await Professor.deleteMany();
-    console.log('Data Destroyed...');
-    process.exit();
+    await School.deleteMany()
+    await Professor.deleteMany()
+    console.log('Data Destroyed...')
+    process.exit()
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
 };
 

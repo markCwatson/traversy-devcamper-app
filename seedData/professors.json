@@ -3,12 +3,98 @@
         "name": "Dr. Sheldon Cooper",
         "email": "cooper@dal.ca",
         "office": "Corey 208",
-        "school": "6342059652c681a57f301013"
+        "school": "6342059652c681a57f301010",
+        "salary": 125000
     },
     {
         "name": "Dr. My Guy",
-        "email": "guy@ubc.ca",
+        "email": "guy@pretend.ca",
         "office": "B Building 404",
-        "school": "6342059652c681a57f301010"
+        "school": "6342059652c681a57f301013",
+        "salary": 100000
+    },
+    {
+        "name": "Dr. Momo",
+        "email": "momo@dal.ca",
+        "office": "Momo 208",
+        "school": "6342059652c681a57f301010",
+        "salary": 150000
+    },
+    {
+        "name": "Dr. Tom Ford",
+        "email": "ford@pretend.ca",
+        "office": "Ford Building 404",
+        "school": "6342059652c681a57f301013",
+        "salary": 180000
+    },
+    {
+        "name": "Dr. Stanly Cooper",
+        "email": "cooper@dal.ca",
+        "office": "Cooper 208",
+        "school": "6342059652c681a57f301010",
+        "salary": 111000
+    },
+    {
+        "name": "Dr. Joe Rogan",
+        "email": "rogan@pretend.ca",
+        "office": "J Building 404",
+        "school": "6342059652c681a57f301013",
+        "salary": 90000
+    },
+    {
+        "name": "Dr. A",
+        "email": "A@dal.ca",
+        "office": "A 208",
+        "school": "6342059652c681a57f301010",
+        "salary": 100000
+    },
+    {
+        "name": "Dr. Z",
+        "email": "Z@pretend.ca",
+        "office": "Z Building 404",
+        "school": "6342059652c681a57f301013",
+        "salary": 200000
+    },
+    {
+        "name": "Dr. Mark Watson",
+        "email": "mark@watson.ca",
+        "office": "W Building 404",
+        "school": "6342059652c681a57f301019",
+        "salary": 250000
+    },
+    {
+        "name": "Dr. Janelle Watson",
+        "email": "janelle@watson.ca",
+        "office": "W Building 405",
+        "school": "6342059652c681a57f301019",
+        "salary": 300000
+    },
+    {
+        "name": "Dr. Drake",
+        "email": "drake@uoft.ca",
+        "office": "D Building 404",
+        "school": "6342059652c681a57f301029",
+        "salary": 50000
+    },
+    {
+        "name": "Dr. Serb Ibaka",
+        "email": "ibaka@uoft.ca",
+        "office": "S Building 404",
+        "school": "6342059652c681a57f301029",
+        "salary": 55000
+    },
+    {
+        "name": "Dr. Fake Man",
+        "email": "fake@ubc.ca",
+        "office": "Fake Building 404",
+        "school": "6342059652c681a57f301039",
+        "salary": 50000
+    },
+    {
+        "name": "Dr. Fake Woman",
+        "email": "fakewoman@ubc.ca",
+        "office": "Fake Building 402",
+        "school": "6342059652c681a57f301039",
+        "salary": 88000
     }
 ]
