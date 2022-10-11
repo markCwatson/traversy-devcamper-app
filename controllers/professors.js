@@ -69,4 +69,46 @@ const addProfessor = asyncHandler(async (req, res, next) => {
     })
 })
 
-export { getProfessors, getProfessor, addProfessor }
+// @desc    Update a professor in database.
+// @route   PUT /api/v1/professors/:id
+// @access  Private
+const updateProfessor = asyncHandler(async (req, res, next) => {
+    const prof = await Professor.findByIdAndUpdate(req.params.id, req.body, {
+        new: true
+    })
+    
+    if (!prof) {
+        return next(new ErrorResponse('No professor found!', 404))
+    }
+
+    res.status(200).json({
+        success: true,
+        data: prof
+    })
+})
+
+// @desc    Delete a professor in database.
+// @route   DELETE /api/v1/professors/:id
+// @access  Private
+const deleteProfessor = asyncHandler(async (req, res, next) => {
+    const prof = await Professor.findById(req.params.id)
+    
+    if (!prof) {
+        return next(new ErrorResponse('Professor not found!', 404))
+    }
+
+    await prof.remove()
+
+    res.status(200).json({
+        success: true,
+        data: {}
+    })
+})
+
+export { 
+    getProfessors,
+    getProfessor,
+    addProfessor,
+    updateProfessor,
+    deleteProfessor
+}

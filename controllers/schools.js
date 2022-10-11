@@ -117,9 +117,12 @@ const deleteSchool = asyncHandler(async (req, res, next) => {
         return next(new ErrorResponse('School not found', 404))
     }
 
-    school.remove()
+    await school.remove()
 
-    res.status(200).json({ success: true, data: {} })
+    res.status(200).json({
+        success: true,
+        data: {}
+    })
 })
 
 // @desc    Get all schools within a radius (in kilometers).
@@ -143,4 +146,11 @@ const getSchoolInRadius = asyncHandler(async (req, res, next) => {
     })
 })
 
-export { getSchools, getSchool, createSchool, updateSchool, deleteSchool, getSchoolInRadius }
+export { 
+    getSchools,
+    getSchool,
+    createSchool,
+    updateSchool,
+    deleteSchool,
+    getSchoolInRadius
+}
