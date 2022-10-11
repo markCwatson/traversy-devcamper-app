@@ -26,19 +26,19 @@ const SchoolSchema = new mongoose.Schema({
         ]
     },
     phone: {
-      type: String,
-      maxlength: [16, 'Phone number must be less than 16 characters!']
+        type: String,
+        maxlength: [16, 'Phone number must be less than 16 characters!']
     },
     email: {
-      type: String,
-      match: [
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-        'Please add a valid email'
-      ]
+        type: String,
+        match: [
+          /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+          'Please add a valid email'
+        ]
     },
     address: {
-      type: String,
-      required: [true, 'Please include an address!']
+        type: String,
+        required: [true, 'Please include an address!']
     },
     location: {
         // GeoJSON Point
@@ -71,19 +71,15 @@ const SchoolSchema = new mongoose.Schema({
             'Law'
         ]
     },
-    averageRating: {
-        type: Number,
-        min: [1, 'Rating must be at least 1'],
-        max: [10, 'Rating must can not be more than 10']
-    },
     averageSalary: {
-      type: Number
+        type: Number,
+        required: true
     },
     photo: {
         type: String,
         default: 'no-photo.jpg'
     },
-        createdAt: {
+    createdAt: {
         type: Date,
         default: Date.now
     }},
@@ -93,40 +89,40 @@ const SchoolSchema = new mongoose.Schema({
 })
 
 SchoolSchema.pre('save', function (next) {
-  this.slug = slugify(this.name, { lower: true } )
-  next()
+    this.slug = slugify(this.name, { lower: true } )
+    next()
 })
 
 SchoolSchema.pre('save', async function (next) {
-  const location = await geocoder.geocode(this.address)
-  this.location = {
-    type: 'Point',
-    coordinates: [
-      location[0].longitude,
-      location[0].latitude
-    ],
-    formattedAddress: location[0].formattedAddress,
-    street: location[0].streetName,
-    city: location[0].city,
-    province: location[0].stateCode,
-    postalCode: location[0].zipcode,
-    country: location[0].countryCode
-  }
+    const location = await geocoder.geocode(this.address)
+    this.location = {
+      type: 'Point',
+      coordinates: [
+        location[0].longitude,
+        location[0].latitude
+      ],
+      formattedAddress: location[0].formattedAddress,
+      street: location[0].streetName,
+      city: location[0].city,
+      province: location[0].stateCode,
+      postalCode: location[0].zipcode,
+      country: location[0].countryCode
+    }
 
-  this.address = undefined
-  next()
+    this.address = undefined
+    next()
 })
 
 SchoolSchema.pre('remove', async function (next) {
-  await this.model('Professor').deleteMany({ school: this._id })
-  next()
+    await this.model('Professor').deleteMany({ school: this._id })
+    next()
 })
 
 SchoolSchema.virtual('professors', {
-  ref: 'Professor',
-  localField: '_id',
-  foreignField: 'school',
-  justOne: false
+    ref: 'Professor',
+    localField: '_id',
+    foreignField: 'school',
+    justOne: false
 })
 
 const School = mongoose.model('School', SchoolSchema)

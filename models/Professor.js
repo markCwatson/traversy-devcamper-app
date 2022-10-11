@@ -47,12 +47,12 @@ ProfessorSchema.statics.getAverageSalary = async function (schoolId) {
     }
 }
 
-ProfessorSchema.post('save', function () {
-    this.constructor.getAverageSalary(this.school)
+ProfessorSchema.post('save', async function () {
+    await this.constructor.getAverageSalary(this.school)
 })
 
-ProfessorSchema.pre('remove', function () {
-    this.constructor.getAverageSalary(this.school)
+ProfessorSchema.pre('remove', async function () {
+    await this.constructor.getAverageSalary(this.school)
 })
 
 const Professor = mongoose.model('Professor', ProfessorSchema)
