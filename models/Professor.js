@@ -18,6 +18,10 @@ const ProfessorSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    photo: {
+        type: String,
+        default: 'no-photo.jpg'
+    },
     school: {
         type: mongoose.Schema.ObjectId,
         ref: 'School',

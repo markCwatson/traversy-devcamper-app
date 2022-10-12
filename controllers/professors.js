@@ -1,3 +1,5 @@
+import path from 'path'
+
 import { Professor } from '../models/professor.js'
 import { School } from '../models/school.js'
 import { ErrorResponse } from '../utils/errorResponse.js'
@@ -105,10 +107,53 @@ const deleteProfessor = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    DUpload a photo.
+// @route   PUT /api/v1/professors/:id/photo
+// @access  Private
+const uploadProfessorPhoto = asyncHandler(async (req, res, next) => {
+    const prof = await Professor.findById(req.params.id)
+    
+    if (!prof) {
+        return next(new ErrorResponse('Professor not found!', 404))
+    }
+
+    if (!req.files) {
+        return next(new ErrorResponse('Please upload an image!', 400))
+    }
+
+    const file = req.files.file
+
+    if (!file.mimetype.startsWith('image')) {
+        return next(new ErrorResponse('Please upload an image!', 400))
+    }
+    
+    if (file.size > process.env.MAX_FILE_SIZE) {
+        return next(new ErrorResponse(`Max filesize is ${process.env.MAX_FILE_SIZE / 1e6} MB`, 400))
+    }
+
+    file.name = `${prof._id}${path.parse(file.name).ext}`
+
+    file.mv(`${process.env.PHOTO_PATH}/${file.name}`, async (err) => {
+        if (err) {
+            return next(new ErrorResponse(`Error uploading file!`, 500))
+        }
+
+        await Professor.findByIdAndUpdate(req.params.id, {
+            photo: file.name
+        })
+
+        res.status(200).json({
+            success: true,
+            data: file.name
+        })
+    })
+})
+
 export { 
     getProfessors,
     getProfessor,
     addProfessor,
     updateProfessor,
-    deleteProfessor
+    deleteProfessor,
+    uploadProfessorPhoto
 }

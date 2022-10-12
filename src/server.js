@@ -1,10 +1,16 @@
 import express from 'express'
 import morgan from 'morgan'
+import fileupload from 'express-fileupload'
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 import { router as schools }  from '../routes/schools.js'
 import { router as professors }  from '../routes/professors.js'
 import { connectDb } from './db/mongoose.js'
 import { errorHandler } from '../middleware/error.js'
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 connectDb()
 
@@ -17,6 +23,11 @@ if (process.env.NODE_ENV === 'dev')
     // Must setup middleware before route definitions
     app.use(morgan('dev'))
 }
+
+app.use(fileupload())
+
+// Set up static folder (visit url/uploads/<filename>)
+app.use(express.static(path.join(__dirname, '../public')))
 
 // Setup routes
 app.use('/api/v1/schools', schools)
