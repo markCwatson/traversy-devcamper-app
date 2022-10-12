@@ -15,9 +15,11 @@ const registerUser = async (req, res, next) => {
         role
      })
     
+     const token = user.getSignedJwt()
+
     res.status(200).json({
         success: true,
-        date: user
+        token
     })
 }
 
