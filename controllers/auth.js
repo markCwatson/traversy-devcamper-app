@@ -15,7 +15,37 @@ const registerUser = async (req, res, next) => {
         role
      })
     
-     const token = user.getSignedJwt()
+    const token = user.getSignedJwt()
+
+    res.status(200).json({
+        success: true,
+        token
+    })
+}
+
+// @desc    Login user.
+// @route   POST /api/v1/auth/login
+// @access  Public
+const loginUser = async (req, res, next) => {
+    const { email, password } = req.body
+
+    if (!email || !password) {
+        return next(new Error('Include email and password!', 400))
+    }
+
+    const user = await User.findOne({ email }).select('+password')
+
+    if (!user) {
+        return next(new Error('Invalid credentials!', 401))
+    }
+
+    const isMatch = await user.checkPassword(password)
+
+    if (!isMatch) {
+        return next(new Error('Invalid credentials!', 401))
+    }
+
+    const token = user.getSignedJwt()
 
     res.status(200).json({
         success: true,
@@ -41,4 +71,8 @@ const deleteUser = async (req, res, next) => {
     })
 }
 
-export { registerUser, deleteUser }
+export {
+    registerUser,
+    deleteUser,
+    loginUser
+}
