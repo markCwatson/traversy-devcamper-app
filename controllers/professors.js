@@ -1,7 +1,7 @@
 import path from 'path'
 
-import { Professor } from '../models/professor.js'
-import { School } from '../models/school.js'
+import { Professor } from '../models/Professor.js'
+import { School } from '../models/School.js'
 import { ErrorResponse } from '../utils/errorResponse.js'
 import { asyncHandler } from '../middleware/async.js'
 

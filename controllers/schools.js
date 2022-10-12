@@ -1,6 +1,6 @@
 import path from 'path'
 
-import { School } from '../models/school.js'
+import { School } from '../models/School.js'
 import { ErrorResponse } from '../utils/errorResponse.js'
 import { asyncHandler } from '../middleware/async.js'
 
@@ -10,62 +10,7 @@ import { geocoder } from '../utils/geocoder.js'
 // @route   GET /api/v1/schools
 // @access  Public
 const getSchools = asyncHandler(async (req, res, next) => {
-    let query
-    
-    const queryCopy = { ...req.query }
-    const removeFields = ['select', 'sort', 'page', 'limit']
-    removeFields.forEach(param => delete queryCopy[param])
-    
-    let options = JSON.stringify(queryCopy)
-    options = options.replace(/\b(in|lte|gte|lt|gt)\b/g, match => `$${match}`)
-
-    query = School.find(JSON.parse(options)).populate({
-        path: 'professors',
-        select: 'name'
-    })
-
-    if (req.query.select) {
-        const fields = req.query.select.split(',').join(' ')
-        query = query.select(fields)
-    }
-
-    if (req.query.sort) {
-        const fields = req.query.sort.split(',').join(' ')
-        query = query.sort(fields)
-    } else {
-        query = query.sort('-createdAt')
-    }
-
-    const page = parseInt(req.query.page, 10) || 1
-    const limit = parseInt(req.query.limit, 10) || 10
-    const startIndex = (page - 1) * limit
-    const endIndex = page * limit
-    const total = await School.countDocuments()
-    query = query.skip(startIndex).limit(limit)
-
-    const schools = await query
-
-    const pagination = {}
-
-    if (endIndex < total) {
-        pagination.next = {
-            page: page + 1,
-            limit
-        }
-    }
-
-    if (startIndex > 0) {
-        pagination.prev = {
-            page: page - 1,
-            limit
-        }
-    }
-
-    if (!schools) {
-        return next(new ErrorResponse('No schools found!', 404))
-    }
-
-    res.status(200).json({ success: true, count: schools.length, pagination, data: schools })
+    res.status(200).json(res.advancedResults)
 })
 
 // @desc    Get a school by id.

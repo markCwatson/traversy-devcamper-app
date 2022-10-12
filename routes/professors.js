@@ -6,7 +6,7 @@ import {
     addProfessor,
     updateProfessor,
     deleteProfessor,
-    uploadProfessorPhoto } from '../controllers/professors.js'
+    uploadProfessorPhoto } from '../controllers/Professors.js'
 
 const router = express.Router({ mergeParams: true })
 
