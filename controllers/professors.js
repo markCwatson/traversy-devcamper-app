@@ -11,24 +11,17 @@ import { asyncHandler } from '../middleware/async.js'
 // @route   GET /api/v1/schools/:schoolId/professors
 // @access  Public
 const getProfessors = asyncHandler(async (req, res, next) => {
-    let query
-
     if (req.params.schoolId) {
-        query = Professor.find({ school: req.params.schoolId })
-    } else [
-        query = Professor.find().populate({
-            path: 'school',
-            select: 'name location.formattedAddress'
+        const profs = Professor.find({ school: req.params.schoolId })
+
+        res.status(200).json({
+            success: true,
+            count: profs.length,
+            data: profs
         })
-    ]
-
-    const schools = await query
-
-    res.status(200).json({
-        success: true,
-        count: schools.length,
-        data: schools
-    })
+    } else {
+        res.status(200).json(res.advancedResults)        
+    }
 })
 
 // @desc    Get a single professor in database.

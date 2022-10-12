@@ -8,9 +8,12 @@ import {
     deleteProfessor,
     uploadProfessorPhoto } from '../controllers/Professors.js'
 
+import { Professor } from '../models/Professor.js'
+import { advancedResults } from '../middleware/advancedResults.js'
+
 const router = express.Router({ mergeParams: true })
 
-router.route('/').get(getProfessors)
+router.route('/').get(advancedResults(Professor, { path: 'school', select: 'name location.formattedAddress' }), getProfessors)
 router.route('/').post(addProfessor)
 router.route('/:id').get(getProfessor)
 router.route('/:id').put(updateProfessor)
