@@ -12,7 +12,7 @@ const registerUser = async (req, res, next) => {
     const checkUser = await User.find({ email })
 
     if (checkUser) {
-        return next(new Error('Email already in use!', 401))
+        return next(new Error('Email already in use!', 400))
     }
 
     const user = await User.create({
@@ -55,6 +55,18 @@ const loginUser = async (req, res, next) => {
     sendToken(user, 200, res)
 }
 
+// @desc    Get current loged-in user.
+// @route   GET /api/v1/auth/me
+// @access  Public
+const getCurrentUser = asyncHandler(async (req, res, next) => {
+    const user = await User.findById(req.user.id)
+
+    res.status(200).json({
+        success: true,
+        data: user
+    })
+})
+
 // @desc    Delete a user.
 // @route   POST /api/v1/auth/:id
 // @access  Private
@@ -76,5 +88,6 @@ const deleteUser = async (req, res, next) => {
 export {
     registerUser,
     deleteUser,
-    loginUser
+    loginUser,
+    getCurrentUser
 }

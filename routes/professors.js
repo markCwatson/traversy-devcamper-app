@@ -10,14 +10,15 @@ import {
 
 import { Professor } from '../models/Professor.js'
 import { advancedResults } from '../middleware/advancedResults.js'
+import { protect } from '../middleware/auth.js'
 
 const router = express.Router({ mergeParams: true })
 
 router.route('/').get(advancedResults(Professor, { path: 'school', select: 'name location.formattedAddress' }), getProfessors)
-router.route('/').post(addProfessor)
+router.route('/').post(protect, addProfessor)
 router.route('/:id').get(getProfessor)
-router.route('/:id').put(updateProfessor)
-router.route('/:id').delete(deleteProfessor)
-router.route('/:id/photo').put(uploadProfessorPhoto)
+router.route('/:id').put(protect, updateProfessor)
+router.route('/:id').delete(protect, deleteProfessor)
+router.route('/:id/photo').put(protect, uploadProfessorPhoto)
 
 export { router }
