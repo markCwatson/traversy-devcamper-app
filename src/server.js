@@ -1,13 +1,14 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 import express from 'express'
 import morgan from 'morgan'
 import fileupload from 'express-fileupload'
-import path from 'path';
-import { fileURLToPath } from 'url';
+import cookieParser from 'cookie-parser'
 
 import { router as schools }  from '../routes/schools.js'
 import { router as professors }  from '../routes/professors.js'
 import { router as auth} from '../routes/auth.js'
-
 import { connectDb } from './db/mongoose.js'
 import { errorHandler } from '../middleware/error.js'
 
@@ -19,6 +20,7 @@ connectDb()
 const app = express()
 
 app.use(express.json())
+app.use(cookieParser())
 
 if (process.env.NODE_ENV === 'dev')
 {

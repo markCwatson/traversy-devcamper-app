@@ -1,12 +1,19 @@
 import { User } from "../models/user.js"
 import { ErrorResponse } from '../utils/errorResponse.js'
 import { asyncHandler } from '../middleware/async.js'
+import { sendToken } from "../utils/sendToken.js"
 
 // @desc    Register a new user.
 // @route   POST /api/v1/auth/register
 // @access  Public
 const registerUser = async (req, res, next) => {
     const { name, email, password, role } = req.body
+
+    const checkUser = await User.find({ email })
+
+    if (checkUser) {
+        return next(new Error('Email already in use!', 401))
+    }
 
     const user = await User.create({
         name,
@@ -45,12 +52,7 @@ const loginUser = async (req, res, next) => {
         return next(new Error('Invalid credentials!', 401))
     }
 
-    const token = user.getSignedJwt()
-
-    res.status(200).json({
-        success: true,
-        token
-    })
+    sendToken(user, 200, res)
 }
 
 // @desc    Delete a user.
