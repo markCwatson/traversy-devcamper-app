@@ -11,7 +11,7 @@ const registerUser = async (req, res, next) => {
 
     const checkUser = await User.find({ email })
 
-    if (checkUser) {
+    if (checkUser.length > 0) {
         return next(new Error('Email already in use!', 400))
     }
 
@@ -21,7 +21,7 @@ const registerUser = async (req, res, next) => {
         password,
         role
      })
-    
+
     const token = user.getSignedJwt()
 
     res.status(200).json({
