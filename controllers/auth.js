@@ -6,13 +6,13 @@ import { sendToken } from "../utils/sendToken.js"
 // @desc    Register a new user.
 // @route   POST /api/v1/auth/register
 // @access  Public
-const registerUser = async (req, res, next) => {
+const registerUser = asyncHandler(async (req, res, next) => {
     const { name, email, password, role } = req.body
 
     const checkUser = await User.find({ email })
 
     if (checkUser.length > 0) {
-        return next(new Error('Email already in use!', 400))
+        return next(new ErrorResponse('Email already in use!', 400))
     }
 
     const user = await User.create({
@@ -28,32 +28,32 @@ const registerUser = async (req, res, next) => {
         success: true,
         token
     })
-}
+})
 
 // @desc    Login user.
 // @route   POST /api/v1/auth/login
 // @access  Public
-const loginUser = async (req, res, next) => {
+const loginUser = asyncHandler(async (req, res, next) => {
     const { email, password } = req.body
 
     if (!email || !password) {
-        return next(new Error('Include email and password!', 400))
+        return next(new ErrorResponse('Include email and password!', 400))
     }
 
     const user = await User.findOne({ email }).select('+password')
 
     if (!user) {
-        return next(new Error('Invalid credentials!', 401))
+        return next(new ErrorResponse('Invalid credentials!', 401))
     }
 
     const isMatch = await user.checkPassword(password)
 
     if (!isMatch) {
-        return next(new Error('Invalid credentials!', 401))
+        return next(new ErrorResponse('Invalid credentials!', 401))
     }
 
     sendToken(user, 200, res)
-}
+})
 
 // @desc    Get current loged-in user.
 // @route   GET /api/v1/auth/me
@@ -70,7 +70,7 @@ const getCurrentUser = asyncHandler(async (req, res, next) => {
 // @desc    Delete a user.
 // @route   POST /api/v1/auth/:id
 // @access  Private
-const deleteUser = async (req, res, next) => {
+const deleteUser = asyncHandler(async (req, res, next) => {
     const user = await User.findById(req.params.id)
     
     if (!user) {
@@ -83,7 +83,7 @@ const deleteUser = async (req, res, next) => {
         success: true,
         date: {}
     })
-}
+})
 
 export {
     registerUser,
