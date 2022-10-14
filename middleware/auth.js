@@ -25,7 +25,7 @@ const protect = asyncHandler(async (req, res, next) => {
     }
 })
 
-const authorize = (role) => {
+const checkRole = (role) => {
     return (res, req, next) => {
         if (role != res.user.role) {
             return next(new ErrorResponse('Not authorized!', 403))
@@ -35,4 +35,4 @@ const authorize = (role) => {
     }
 }
 
-export { protect, authorize }
+export { protect, checkRole }

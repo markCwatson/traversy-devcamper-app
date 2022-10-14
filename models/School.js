@@ -32,8 +32,8 @@ const SchoolSchema = new mongoose.Schema({
     email: {
         type: String,
         match: [
-          /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-          'Please add a valid email'
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+        'Please add a valid email'
         ]
     },
     address: {
@@ -43,12 +43,12 @@ const SchoolSchema = new mongoose.Schema({
     location: {
         // GeoJSON Point
         type: {
-          type: String,
-          enum: ['Point']
+        type: String,
+        enum: ['Point']
         },
         coordinates: {
-          type: [Number],
-          index: '2dsphere'
+        type: [Number],
+        index: '2dsphere'
         },
         formattedAddress: String,
         street: String,
@@ -82,10 +82,16 @@ const SchoolSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    }},
-    {
-        toJSON: { virtuals: true },
-        toObject: { virtuals: true }
+    },
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: true
+    }
+},
+{
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 })
 
 SchoolSchema.pre('save', function (next) {
