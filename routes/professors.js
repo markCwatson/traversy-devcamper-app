@@ -20,7 +20,7 @@ import {
 
 const router = express.Router({ mergeParams: true })
 
-router.route('/').get(advancedResults(Professor, { path: 'school', select: 'name location.formattedAddress' }), getProfessors)
+router.route('/').get(advancedResults(Professor, { path: 'school', select: 'name user location.formattedAddress' }), getProfessors)
 router.route('/').post(checkToken, confirmOwnershp(Professor), createProfessor)
 router.route('/:id').get(getProfessor)
 router.route('/:id').put(checkToken, confirmOwnershp(Professor), updateProfessor)
