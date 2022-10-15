@@ -89,6 +89,10 @@ const deleteSchool = asyncHandler(async (req, res, next) => {
         return next(new ErrorResponse('School not found', 404))
     }
 
+    if ((school.user.toString() !== req.user.id) && (req.user.role !== 'Admin')) {
+        return next(new ErrorResponse('This user cannot delete this school!', 401))
+    }
+
     await school.remove()
 
     res.status(200).json({
