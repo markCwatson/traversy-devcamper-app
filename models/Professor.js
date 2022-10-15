@@ -26,6 +26,11 @@ const ProfessorSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'School',
         required: true
+    },
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: true
     }
 })
 

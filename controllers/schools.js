@@ -33,7 +33,7 @@ const getSchool = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/schools
 // @access  Private
 const createSchool = asyncHandler(async (req, res, next) => {
-    // req.user comes from the authorization/protection middleware
+    // req.user comes from the checkToken middleware
     req.body.user = req.user
 
     // Check if they've already created a school (only Admins can create more than one)

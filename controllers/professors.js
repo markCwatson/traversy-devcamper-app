@@ -43,20 +43,27 @@ const getProfessor = asyncHandler(async (req, res, next) => {
     })
 })
 
-// @desc    Add a new professor to database.
+// @desc    Create a new professor to database.
 // @route   POST /api/v1/schools/:schoolId/professors
 // @access  Private
-const addProfessor = asyncHandler(async (req, res, next) => {
+const createProfessor = asyncHandler(async (req, res, next) => {
     // Add this professor to a school using the field in professor model
     req.body.school = req.params.schoolId
 
-    const school = await School.findById(req.params.schoolId)
+    // req.user comes from the checkToken middleware
+    req.body.user = req.user
+
+    const school = await School.findOne({ user: req.user.id })
     
     if (!school) {
         return next(new ErrorResponse('No school found!', 404))
     }
 
     const prof = await Professor.create(req.body)
+
+    if (!prof) {
+        return next(new ErrorResponse('Professor not created!', 400))
+    }
 
     res.status(200).json({
         success: true,
@@ -145,7 +152,7 @@ const uploadProfessorPhoto = asyncHandler(async (req, res, next) => {
 export { 
     getProfessors,
     getProfessor,
-    addProfessor,
+    createProfessor,
     updateProfessor,
     deleteProfessor,
     uploadProfessorPhoto

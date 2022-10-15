@@ -37,14 +37,23 @@ const checkRole = (role) => {
 
 const confirmOwnershp = (Model) => {
     return async (req, res, next) => {
-        const entity = await Model.findById(req.params.id)
+        let entity
+        
+        // This is a bit of a hack to get this middleware to work with both school and prof
+        if (req.params.id) {
+            entity = await Model.findById(req.params.id)
+        } else if (req.params.schoolId) {
+            // Since the school router routes /:schoolId/professors to the professor route...
+            // the schoolId is being mergeparams-ed rather than id.
+            entity = await Model.findOne({ school: req.params.schoolId })
+        }
 
         if (!entity) {
             return next(new ErrorResponse('Entity not found!', 404))
         }
 
         if ((entity.user.toString() !== req.user.id) && (req.user.role !== 'Admin')) {
-            return next(new ErrorResponse('This user cannot delete this entity!', 401))
+            return next(new ErrorResponse('This user cannot modify this entity!', 401))
         }
 
         next()

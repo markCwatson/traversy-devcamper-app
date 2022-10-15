@@ -7,7 +7,8 @@ import {
     updateSchool,
     deleteSchool,
     getSchoolInRadius,
-    uploadSchoolPhoto } from '../controllers/schools.js'
+    uploadSchoolPhoto
+} from '../controllers/schools.js'
 
 import { router as professorRouter} from './professors.js'
 import { School } from '../models/School.js'
