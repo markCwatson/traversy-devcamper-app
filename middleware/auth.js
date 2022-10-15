@@ -35,4 +35,24 @@ const checkRole = (role) => {
     }
 }
 
-export { checkToken, checkRole }
+const confirmOwnershp = (Model) => {
+    return async (req, res, next) => {
+        const entity = await Model.findById(req.params.id)
+
+        if (!entity) {
+            return next(new ErrorResponse('Entity not found!', 404))
+        }
+
+        if ((entity.user.toString() !== req.user.id) && (req.user.role !== 'Admin')) {
+            return next(new ErrorResponse('This user cannot delete this entity!', 401))
+        }
+
+        next()
+    }
+}
+
+export {
+    checkToken,
+    checkRole,
+    confirmOwnershp
+}
