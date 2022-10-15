@@ -23,7 +23,10 @@ const getSchool = asyncHandler(async (req, res, next) => {
         return next(new ErrorResponse('School not found', 404))
     }
 
-    res.status(200).json({ success: true, data: school })
+    res.status(200).json({
+        success: true,
+        data: school
+    })
 })
 
 // @desc    Create a new school.
@@ -46,22 +49,34 @@ const createSchool = asyncHandler(async (req, res, next) => {
         return next(new ErrorResponse('School not created!', 400))
     }
 
-    res.status(201).json({ success: true, data: school })
+    res.status(201).json({
+        success: true,
+        data: school
+    })
 })
 
 // @desc    Update a school by id.
 // @route   PUT /api/v1/schools/:id
 // @access  Private
 const updateSchool = asyncHandler(async (req, res, next) => {
-    const school = await School.findByIdAndUpdate(req.params.id, req.body, {
-        new: true
-    })
+    let school = await School.findById(req.params.id)
 
     if (!school) {
         return next(new ErrorResponse('School not found', 404))
     }
 
-    res.status(200).json({ success: true, data: school })
+    if ((school.user.toString() !== req.user.id) && (req.user.role !== 'Admin')) {
+        return next(new ErrorResponse('This user cannot update this school!', 401))
+    }
+
+    school = await School.findByIdAndUpdate(req.params.id, req.body, {
+        new: true
+    })
+
+    res.status(200).json({
+        success: true,
+        data: school
+    })
 })
 
 // @desc    Delete a school by id.
