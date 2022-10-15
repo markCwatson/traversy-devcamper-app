@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { protect } from '../middleware/auth.js'
+import { checkToken } from '../middleware/auth.js'
 
 import {
     registerUser,
@@ -13,7 +13,7 @@ const router = express.Router()
 
 router.route('/register').post(registerUser)
 router.route('/login').post(loginUser)
-router.route('/:id').delete(protect, deleteUser)
-router.route('/me').get(protect, getCurrentUser)
+router.route('/:id').delete(checkToken, deleteUser)
+router.route('/me').get(checkToken, getCurrentUser)
 
 export { router }

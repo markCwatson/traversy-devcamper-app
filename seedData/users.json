@@ -1,0 +1,37 @@
+[
+    {
+        "_id": "6342059652c681a57f300001",
+        "name": "First User",
+        "email": "first@email.com",
+        "password": "mypassword",
+        "role": "user"
+    },
+    {
+        "_id": "6342059652c681a57f300002",
+        "name": "Second User",
+        "email": "second@email.com",
+        "password": "mypassword",
+        "role": "user"
+    },
+    {
+        "_id": "6342059652c681a57f300003",
+        "name": "Third User",
+        "email": "third@email.com",
+        "password": "mypassword",
+        "role": "user"
+    },
+    {
+        "_id": "6342059652c681a57f300004",
+        "name": "Fourth User",
+        "email": "fourth@email.com",
+        "password": "mypassword",
+        "role": "user"
+    },
+    {
+        "_id": "6342059652c681a57f300005",
+        "name": "Fifth User",
+        "email": "fifth@email.com",
+        "password": "mypassword",
+        "role": "user"
+    }
+]

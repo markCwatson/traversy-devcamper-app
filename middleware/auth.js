@@ -4,7 +4,7 @@ import { User } from "../models/user.js"
 import { ErrorResponse } from '../utils/errorResponse.js'
 
 
-const protect = asyncHandler(async (req, res, next) => {
+const checkToken = asyncHandler(async (req, res, next) => {
     let token
     const { authorization } = req.headers
 
@@ -35,4 +35,4 @@ const checkRole = (role) => {
     }
 }
 
-export { protect, checkRole }
+export { checkToken, checkRole }

@@ -1,6 +1,7 @@
 [
     {
         "_id": "6342059652c681a57f301013",
+        "user": "6342059652c681a57f300001",
         "name": "Pretend University",
         "description": "Pretend University is a large public research university in Nova Scotia, Canada, with three campuses in Halifax, a fourth in Bible Hill, and a second medical school campus in Saint John, New Brunswick.",
         "website": "https://dals.ca",
@@ -12,6 +13,7 @@
     },
     {
         "_id": "6342059652c681a57f301010",
+        "user": "6342059652c681a57f300002",
         "name": "Dalhousie University",
         "description": "Dalhousie University is a large public research university in Nova Scotia, Canada, with three campuses in Halifax, a fourth in Bible Hill, and a second medical school campus in Saint John, New Brunswick.",
         "website": "https://dal.ca",
@@ -23,6 +25,7 @@
     },
     {
         "_id": "6342059652c681a57f301019",
+        "user": "6342059652c681a57f300003",
         "name": "Mark Watson University",
         "description": "Mark Watson University is a large public research university in Nova Scotia, Canada, with three campuses in Halifax, a fourth in Bible Hill, and a second medical school campus in Saint John, New Brunswick.",
         "website": "https://markwatson.ca",
@@ -34,6 +37,7 @@
     },
     {
         "_id": "6342059652c681a57f301029",
+        "user": "6342059652c681a57f300004",
         "name": "University of Toronto",
         "description": "The University of Toronto is a public research university in Toronto, Ontario, Canada, located on the grounds that surround Queen's Park.",
         "website": "https://utoronto.ca",
@@ -45,6 +49,7 @@
     },
     {
         "_id": "6342059652c681a57f301039",
+        "user": "6342059652c681a57f300005",
         "name": "University of British Columbia",
         "description": "The University of British Columbia is a public research university with campuses near Vancouver and in Kelowna, British Columbia. Established in 1908, it is British Columbia's oldest university.",
         "website": "https://ubc.ca",
