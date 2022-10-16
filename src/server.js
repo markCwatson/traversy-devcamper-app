@@ -6,6 +6,8 @@ import morgan from 'morgan'
 import fileupload from 'express-fileupload'
 import cookieParser from 'cookie-parser'
 import mongoSanitize from 'express-mongo-sanitize'
+import helmet from 'helmet'
+import xss from 'xss-clean'
 
 import { router as schools }  from '../routes/schools.js'
 import { router as professors }  from '../routes/professors.js'
@@ -29,13 +31,15 @@ if (process.env.NODE_ENV === 'dev')
     app.use(morgan('dev'))
 }
 
-// By default, $ and . characters are removed completely from user-supplied input in the following places:
-// - req.body
-// - req.params
-// - req.headers
-// - req.query
+// Security
+// By default, $ and . characters are removed completely from user-supplied input in: req.body/params/headers/query
 app.use(mongoSanitize())
+// Add XSS protection
+app.use(xss())
+// Add extra security headers
+app.use(helmet())
 
+// For uploading pics
 app.use(fileupload())
 
 // Set up static folder (visit url/uploads/<filename>)
