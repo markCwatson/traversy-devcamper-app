@@ -7,7 +7,7 @@ import {
     updateProfessor,
     deleteProfessor,
     uploadProfessorPhoto
-} from '../controllers/Professors.js'
+} from '../controllers/professors.js'
 
 import { Professor } from '../models/Professor.js'
 import { advancedResults } from '../middleware/advancedResults.js'
