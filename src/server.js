@@ -5,9 +5,13 @@ import express from 'express'
 import morgan from 'morgan'
 import fileupload from 'express-fileupload'
 import cookieParser from 'cookie-parser'
+
 import mongoSanitize from 'express-mongo-sanitize'
 import helmet from 'helmet'
 import xss from 'xss-clean'
+import rateLimit from 'express-rate-limit'
+import hpp from 'hpp'
+import cors from 'cors'
 
 import { router as schools }  from '../routes/schools.js'
 import { router as professors }  from '../routes/professors.js'
@@ -25,19 +29,32 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser())
 
+// Must setup middleware before route definitions
+
 if (process.env.NODE_ENV === 'dev')
 {
-    // Must setup middleware before route definitions
     app.use(morgan('dev'))
 }
 
-// Security
 // By default, $ and . characters are removed completely from user-supplied input in: req.body/params/headers/query
 app.use(mongoSanitize())
 // Add XSS protection
 app.use(xss())
 // Add extra security headers
 app.use(helmet())
+// Protect against HTTP Parameter Pollution attacks
+app.use(hpp())
+// Enable CORS
+app.use(cors())
+
+// Limit repeated requests to public APIs and/or endpoints
+// Apply the rate limiting middleware to all requests
+app.use(rateLimit({
+	windowMs: 10 * 60 * 1000, // 10 minutes
+	max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+}))
 
 // For uploading pics
 app.use(fileupload())
