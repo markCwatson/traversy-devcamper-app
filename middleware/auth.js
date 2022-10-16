@@ -9,7 +9,11 @@ const checkToken = asyncHandler(async (req, res, next) => {
     const { authorization } = req.headers
 
     if (authorization && authorization.startsWith('Bearer')) {
+        // Use token in header...
         token = authorization.split(' ')[1]
+    } else if (req.cookies.token) {
+        /// ... or in cookie
+        token = req.cookies.token
     }
 
     if (!token) {
