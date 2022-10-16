@@ -33,6 +33,47 @@ const registerUser = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Update user.
+// @route   PUT /api/v1/auth/update
+// @access  Private
+const updateUser = asyncHandler(async (req, res, next) => {
+    const updateFields = {
+        name: req.body.name,
+        email: req.body.email
+    }
+
+    // req.user.id from checkToken middleware
+    const user = await User.findByIdAndUpdate(req.user.id, updateFields, {
+        new: true
+    })
+
+    if (!user) {
+        return next(new ErrorResponse('User not found', 404))
+    }
+
+    res.status(200).json({
+        success: true,
+        data: user
+    })
+})
+
+// @desc    Update user's password.
+// @route   PUT /api/v1/auth/updatepassword
+// @access  Private
+const updatePassword = asyncHandler(async (req, res, next) => {
+    // req.user.id from checkToken middleware
+    const user = await User.findById(req.user.id).select('+password')
+
+    if (!(await user.checkPassword(req.body.currentPassword))) {
+        return next(new ErrorResponse('Wrong password!', 401))
+    }
+
+    user.password = req.body.newPassword
+    await user.save()
+
+    sendToken(user, 200, res)
+})
+
 // @desc    Login user.
 // @route   POST /api/v1/auth/login
 // @access  Public
@@ -160,6 +201,8 @@ const deleteUser = asyncHandler(async (req, res, next) => {
 
 export {
     registerUser,
+    updateUser,
+    updatePassword,
     deleteUser,
     loginUser,
     logoutUser,
