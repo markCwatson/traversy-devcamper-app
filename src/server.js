@@ -15,7 +15,7 @@ import cors from 'cors'
 
 import { router as schools }  from '../routes/schools.js'
 import { router as professors }  from '../routes/professors.js'
-import { router as auth} from '../routes/auth.js'
+import { router as users} from '../routes/users.js'
 import { connectDb } from './db/mongoose.js'
 import { errorHandler } from '../middleware/error.js'
 
@@ -65,7 +65,7 @@ app.use(express.static(path.join(__dirname, '../public')))
 // Setup routes
 app.use('/api/v1/schools', schools)
 app.use('/api/v1/professors', professors)
-app.use('/api/v1/auth', auth)
+app.use('/api/v1/user', users)
 app.use(errorHandler)
 
 const server = app.listen(process.env.PORT, () => {
