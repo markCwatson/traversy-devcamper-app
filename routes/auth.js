@@ -7,7 +7,9 @@ import {
     deleteUser,
     loginUser,
     logoutUser,
-    getCurrentUser
+    getCurrentUser,
+    forgotPassword,
+    resetPassword
 } from "../controllers/auth.js"
 
 const router = express.Router()
@@ -17,5 +19,7 @@ router.route('/login').post(loginUser)
 router.route('/logout').get(logoutUser)
 router.route('/:id').delete(checkToken, deleteUser)
 router.route('/me').get(checkToken, getCurrentUser)
+router.route('/forgotpassword').post(forgotPassword)
+router.route('/resetpassword/:token').put(resetPassword)
 
 export { router }

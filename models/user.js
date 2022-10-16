@@ -1,6 +1,8 @@
 import mongoose from "mongoose"
 import bcryptjs from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import crypto from 'crypto'
+import { notDeepStrictEqual } from "assert"
 
 const UserSchema = new mongoose.Schema({
     name: { 
@@ -40,6 +42,10 @@ const UserSchema = new mongoose.Schema({
 })
 
 UserSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+        next()
+    }
+
     const salt = await bcryptjs.genSalt(10)
     this.password = await bcryptjs.hash(this.password, salt)
 
@@ -55,6 +61,15 @@ UserSchema.methods.getSignedJwt = function () {
 
 UserSchema.methods.checkPassword = async function (password) {
     return await bcryptjs.compare(password, this.password) 
+}
+
+UserSchema.methods.getResetPasswordToken = function () {
+    const token = crypto.randomBytes(20).toString('hex')
+    
+    this.resetPasswordToken = crypto.createHash('sha256').update(token).digest('hex')
+    this.resetPasswordExpire = Date.now() + 10 * 60 * 1000
+
+    return token
 }
 
 const User = mongoose.model('User', UserSchema)
