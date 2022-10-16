@@ -9,5 +9,5 @@ This ia simple project based on Brad Traversy's course called "Node.js API Maste
 <br>
 
 <p>
-The API was developed and tested with Postman. The API will be explained at the url <a href="https://www.mwatson-school-app.heroku-app.com">mwatson-school-app.heroku-app.com</a> (coming soon).
+The API was developed and tested with Postman. The API will be explained at the url <a href="https://mwatson-school-app.herokuapp.com/">mwatson-school-app.heroku-app.com</a> (coming soon).
 </p>
